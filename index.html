@@ -1,275 +1,462 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Home Purchase & Sale Calculators</title>
-<style>
-  body { font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial; margin: 18px; color:#0f172a; }
-  h1 { margin-bottom: 6px; font-size: 20px; }
-  .tabs { display:flex; gap:8px; margin-bottom:12px; }
-  .tab { padding:8px 12px; border-radius:8px; background:#f1f5f9; cursor:pointer; }
-  .tab.active { background:#0ea5e9; color:white; }
-  .panel { display:none; padding:12px; border-radius:8px; box-shadow: 0 6px 18px rgba(2,6,23,0.06); background:white; }
-  .panel.active { display:block; }
-  .grid { display:grid; grid-template-columns: 260px 1fr; gap:8px 16px; align-items:center; margin-bottom:12px; }
-  label { font-size:13px; }
-  input[type="number"], input[type="text"], select { width:100%; padding:8px; border-radius:6px; border:1px solid #e6eef6; }
-  .row { display:flex; gap:8px; align-items:center; }
-  .card { padding:12px; border-radius:8px; background:#f8fafc; }
-  .result { font-weight:700; font-size:18px; }
-  button { background:#0ea5e9; color:white; border:0; padding:8px 12px; border-radius:6px; cursor:pointer; }
-  small { color:#64748b; display:block; margin-top:4px; }
-  .link { margin-top:8px; display:inline-block; color:#0ea5e9; }
-  footer { margin-top:20px; color:#475569; font-size:13px; }
-.style2 {color: #0099FF}
-</style>
+  <meta charset="UTF-8" />
+  <title>Home Purchase & Sale Calculators</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      margin: 0;
+      padding: 1.5rem;
+      background: #f5f5f7;
+      color: #222;
+    }
+    h1, h2 {
+      margin-top: 0;
+    }
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .card {
+      background: #fff;
+      border-radius: 8px;
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+    }
+    .card h2 {
+      margin-bottom: 0.5rem;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 0.75rem 1.5rem;
+      align-items: flex-end;
+    }
+    label {
+      font-size: 0.85rem;
+      font-weight: 600;
+      display: block;
+      margin-bottom: 0.15rem;
+    }
+    input[type="number"] {
+      width: 100%;
+      padding: 0.35rem 0.45rem;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+      font-size: 0.9rem;
+      box-sizing: border-box;
+    }
+    .output {
+      font-weight: 600;
+      font-size: 0.95rem;
+      padding: 0.35rem 0.45rem;
+      background: #f0f2f5;
+      border-radius: 4px;
+      min-height: 1.8rem;
+      display: flex;
+      align-items: center;
+    }
+    .section-title {
+      font-size: 0.9rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: #666;
+      margin-bottom: 0.5rem;
+    }
+    .note {
+      font-size: 0.8rem;
+      color: #666;
+      margin-top: 0.25rem;
+    }
+    .two-col {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1.5rem;
+    }
+    @media (max-width: 600px) {
+      body {
+        padding: 1rem;
+      }
+    }
+  </style>
 </head>
 <body>
+  <div class="container">
+    <h1>Home Purchase & Sale Calculators</h1>
 
-<h1 class="style2">Home Purchase & Home Sale Calculators</h1>
-<div class="tabs">
-  <div class="tab active" data-target="purchase">Home Purchase Estimator</div>
-  <div class="tab" data-target="sell">Home Sale Proceeds Estimator</div>
-</div>
+    <!-- ===================== HOME PURCHASE CALCULATORS ===================== -->
+    <div class="card">
+      <div class="section-title">Home Purchase Calculators</div>
+      <div class="two-col">
+        <!-- Home Purchase Calculator 1 -->
+        <div>
+          <h2>Home Purchase Calculator</h2>
+          <p class="note">Home Purchase Estimator</p>
+          <div class="grid">
+            <div>
+              <label for="hp1_rate">Rate %</label>
+              <input type="number" id="hp1_rate" value="5.875" step="0.01" />
+            </div>
+            <div>
+              <label for="hp1_points">Loan Points %</label>
+              <input type="number" id="hp1_points" value="1.5" step="0.01" />
+            </div>
+            <div>
+              <label for="hp1_n">Number of Payments</label>
+              <input type="number" id="hp1_n" value="360" />
+            </div>
+            <div>
+              <label for="hp1_price">Home Sale Price</label>
+              <input type="number" id="hp1_price" value="750000" />
+            </div>
+            <div>
+              <label for="hp1_orig">Origination Fees / Closing</label>
+              <input type="number" id="hp1_orig" value="1000" />
+            </div>
+            <div>
+              <label for="hp1_down">Down Payment</label>
+              <input type="number" id="hp1_down" value="400000" />
+            </div>
+            <div>
+              <label for="hp1_tax_annual">Property Taxes Est. (Annual)</label>
+              <input type="number" id="hp1_tax_annual" value="0" />
+              <div class="note">*Estimated for McLean Cty</div>
+            </div>
+            <div>
+              <label for="hp1_hoa">HOA Monthly Dues</label>
+              <input type="number" id="hp1_hoa" value="0" />
+            </div>
+            <div>
+              <label for="hp1_ins">Insurance Cost Monthly</label>
+              <input type="number" id="hp1_ins" value="0" />
+            </div>
+            <div>
+              <label for="hp1_pmi">PMI Cost Monthly</label>
+              <input type="number" id="hp1_pmi" value="0" />
+            </div>
 
-<!-- Purchase panel -->
-<div id="purchase" class="panel active">
-  <div class="grid">
-    <label>Home Sale Price</label>
-    <input id="p_price" type="number" value="750000" step="1" />
+            <div>
+              <label>Amount Borrowed</label>
+              <div class="output" id="hp1_borrowed"></div>
+            </div>
+            <div>
+              <label>Monthly Loan Payment</label>
+              <div class="output" id="hp1_pmt"></div>
+            </div>
+            <div>
+              <label>Down Payment Req. (20%)</label>
+              <div class="output" id="hp1_down_req"></div>
+              <div class="note">* For 20% Down</div>
+            </div>
+            <div>
+              <label>Total Monthly Payment</label>
+              <div class="output" id="hp1_total_monthly"></div>
+            </div>
+            <div>
+              <label>Cash Due at Closing</label>
+              <div class="output" id="hp1_cash_closing"></div>
+            </div>
+          </div>
+        </div>
 
-    <label>Down Payment (cash)</label>
-    <input id="p_down" type="number" value="400000" step="1" />
+        <!-- Home Purchase Calculator 2 -->
+        <div>
+          <h2>Home Purchase Calculator (2)</h2>
+          <p class="note">Home Purchase Estimator</p>
+          <div class="grid">
+            <div>
+              <label for="hp2_rate">Rate %</label>
+              <input type="number" id="hp2_rate" value="6.25" step="0.01" />
+            </div>
+            <div>
+              <label for="hp2_points">Loan Points %</label>
+              <input type="number" id="hp2_points" value="0.5" step="0.01" />
+            </div>
+            <div>
+              <label for="hp2_n">Number of Payments</label>
+              <input type="number" id="hp2_n" value="360" />
+            </div>
+            <div>
+              <label for="hp2_price">Home Sale Price</label>
+              <input type="number" id="hp2_price" value="254900" />
+            </div>
+            <div>
+              <label for="hp2_orig">Origination Fees / Closing</label>
+              <input type="number" id="hp2_orig" value="1000" />
+            </div>
+            <div>
+              <label for="hp2_down">Down Payment</label>
+              <input type="number" id="hp2_down" value="50000" />
+            </div>
+            <div>
+              <label for="hp2_tax_annual">Property Taxes Est. (Annual)</label>
+              <input type="number" id="hp2_tax_annual" value="0" />
+              <div class="note">*Estimated for McLean Cty</div>
+            </div>
+            <div>
+              <label for="hp2_hoa">HOA Monthly Dues</label>
+              <input type="number" id="hp2_hoa" value="48" />
+            </div>
+            <div>
+              <label for="hp2_ins">Insurance Cost Monthly</label>
+              <input type="number" id="hp2_ins" value="0" />
+            </div>
+            <div>
+              <label for="hp2_pmi">PMI Cost Monthly</label>
+              <input type="number" id="hp2_pmi" value="0" />
+            </div>
 
-    <label>Interest Rate (annual %)</label>
-    <input id="p_rate" type="number" value="5.875" step="0.001" />
+            <div>
+              <label>Amount Borrowed</label>
+              <div class="output" id="hp2_borrowed"></div>
+            </div>
+            <div>
+              <label>Monthly Loan Payment</label>
+              <div class="output" id="hp2_pmt"></div>
+            </div>
+            <div>
+              <label>Down Payment Req. (20%)</label>
+              <div class="output" id="hp2_down_req"></div>
+              <div class="note">* For 20% Down</div>
+            </div>
+            <div>
+              <label>Total Monthly Payment</label>
+              <div class="output" id="hp2_total_monthly"></div>
+            </div>
+            <div>
+              <label>Cash Due at Closing</label>
+              <div class="output" id="hp2_cash_closing"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
-    <label>Loan Term (months)</label>
-    <input id="p_n" type="number" value="360" step="1" />
+    <!-- ===================== HOME SELL CALCULATORS ===================== -->
+    <div class="card">
+      <div class="section-title">Home Sell Calculators</div>
+      <div class="two-col">
+        <!-- Home Sell Calculator 1 -->
+        <div>
+          <h2>Home Sell Calculator</h2>
+          <p class="note">Home Sale Proceeds Estimator</p>
+          <div class="grid">
+            <div>
+              <label for="hs1_mort_balance">Current Mortgage Balance</label>
+              <input type="number" id="hs1_mort_balance" value="120000" />
+              <div class="note">* Enter amount still owed on current mortgage</div>
+            </div>
+            <div>
+              <label for="hs1_sale_price">Sale Price</label>
+              <input type="number" id="hs1_sale_price" value="190000" />
+            </div>
+            <div>
+              <label for="hs1_agent_pct">Agent Commission %</label>
+              <input type="number" id="hs1_agent_pct" value="6" step="0.1" />
+            </div>
+            <div>
+              <label>Total Agent Commissions</label>
+              <div class="output" id="hs1_agent_comm"></div>
+            </div>
+            <div>
+              <label for="hs1_prop_tax">Current Property Taxes (Annual)</label>
+              <input type="number" id="hs1_prop_tax" value="3067" />
+              <div class="note">* Enter annual amount of current Property Taxes</div>
+            </div>
+            <div>
+              <label for="hs1_month_sold">Month # Sold</label>
+              <input type="number" id="hs1_month_sold" value="10" min="1" max="12" />
+              <div class="note">* Ex: Sold in October = 10, Sold in May = 5, etc.</div>
+            </div>
+            <div>
+              <label>Tax Credit to Buyer</label>
+              <div class="output" id="hs1_tax_credit"></div>
+            </div>
+            <div>
+              <label for="hs1_repairs">Selling Concessions / Repairs</label>
+              <input type="number" id="hs1_repairs" value="1000" />
+              <div class="note">* Enter amounts to repair/remedy items</div>
+            </div>
+            <div>
+              <label>Closing Costs Est.</label>
+              <div class="output" id="hs1_closing_costs"></div>
+              <div class="note">Calculated - Can be entered manually instead</div>
+            </div>
+            <div>
+              <label for="hs1_atty">Atty Fees</label>
+              <input type="number" id="hs1_atty" value="500" />
+              <div class="note">* Enter attorney Fees</div>
+            </div>
+            <div>
+              <label>Gross Proceeds</label>
+              <div class="output" id="hs1_gross"></div>
+            </div>
+            <div>
+              <label>Net Proceeds</label>
+              <div class="output" id="hs1_net"></div>
+            </div>
+          </div>
+        </div>
 
-    <label>Loan Points (%)</label>
-    <input id="p_points_pct" type="number" value="1.5" step="0.01" />
-
-    <label>Origination / Closing Fees (flat)</label>
-    <input id="p_orig_fee" type="number" value="1000" step="1" />
-
-    <label>Estimated Annual Property Taxes</label>
-    <input id="p_prop_tax" type="number" value="18500" step="1" />
-
-    <label>Insurance (annual)</label>
-    <input id="p_insurance_ann" type="number" value="5725" step="1" />
-
-    <label>HOA Monthly Dues</label>
-    <input id="p_hoa" type="number" value="0" step="1" />
-
-    <label>PMI Monthly (enter 0 if none)</label>
-    <input id="p_pmi" type="number" value="0" step="0.01" />
-
-    <label>(Optional) Down Payment Requirement for 20% (auto shown)</label>
-    <input id="p_required20" type="number" value="150000" readonly />
+        <!-- Home Sell Calculator 2 -->
+        <div>
+          <h2>Home Sell Calculator (2)</h2>
+          <p class="note">Home Sale Proceeds Estimator</p>
+          <div class="grid">
+            <div>
+              <label for="hs2_mort_balance">Current Mortgage Balance</label>
+              <input type="number" id="hs2_mort_balance" value="120000" />
+              <div class="note">* Enter amount still owed on current mortgage</div>
+            </div>
+            <div>
+              <label for="hs2_sale_price">Sale Price</label>
+              <input type="number" id="hs2_sale_price" value="190000" />
+            </div>
+            <div>
+              <label for="hs2_agent_pct">Agent Commission %</label>
+              <input type="number" id="hs2_agent_pct" value="6" step="0.1" />
+            </div>
+            <div>
+              <label>Total Agent Commissions</label>
+              <div class="output" id="hs2_agent_comm"></div>
+            </div>
+            <div>
+              <label for="hs2_prop_tax">Current Property Taxes (Annual)</label>
+              <input type="number" id="hs2_prop_tax" value="3067" />
+              <div class="note">* Enter annual amount of current Property Taxes</div>
+            </div>
+            <div>
+              <label for="hs2_month_sold">Month # Sold</label>
+              <input type="number" id="hs2_month_sold" value="10" min="1" max="12" />
+              <div class="note">* Ex: Sold in October = 10, Sold in May = 5, etc.</div>
+            </div>
+            <div>
+              <label>Tax Credit to Buyer</label>
+              <div class="output" id="hs2_tax_credit"></div>
+            </div>
+            <div>
+              <label for="hs2_repairs">Selling Concessions / Repairs</label>
+              <input type="number" id="hs2_repairs" value="1000" />
+              <div class="note">* Enter amounts to repair/remedy items</div>
+            </div>
+            <div>
+              <label>Closing Costs Est.</label>
+              <div class="output" id="hs2_closing_costs"></div>
+              <div class="note">Calculated - Can be entered manually instead</div>
+            </div>
+            <div>
+              <label for="hs2_atty">Atty Fees</label>
+              <input type="number" id="hs2_atty" value="500" />
+              <div class="note">* Enter attorney Fees</div>
+            </div>
+            <div>
+              <label>Gross Proceeds</label>
+              <div class="output" id="hs2_gross"></div>
+            </div>
+            <div>
+              <label>Net Proceeds</label>
+              <div class="output" id="hs2_net"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 
-  <div class="grid">
-    <label>Amount Borrowed (loan principal)</label>
-    <input id="p_loan" type="number" readonly />
+  <!-- ===================== JAVASCRIPT LOGIC ===================== -->
+  <script>
+    function fmtMoney(x) {
+      if (isNaN(x) || !isFinite(x)) return "";
+      return x.toLocaleString(undefined, { style: "currency", currency: "USD", maximumFractionDigits: 0 });
+    }
 
-    <label>Loan Points (amount)</label>
-    <input id="p_points_amt" type="number" readonly />
+    function mortgagePayment(principal, annualRatePct, nPayments) {
+      const r = (annualRatePct / 100) / 12;
+      if (r === 0 || nPayments === 0) return principal / Math.max(nPayments, 1);
+      const pow = Math.pow(1 + r, nPayments);
+      return principal * (r * pow) / (pow - 1);
+    }
 
-    <label>Monthly Loan Payment (P&I)</label>
-    <input id="p_monthly_loan" type="number" readonly />
+    function updateHomePurchase(prefix) {
+      const rate = parseFloat(document.getElementById(prefix + "_rate").value) || 0;
+      const pointsPct = parseFloat(document.getElementById(prefix + "_points").value) || 0;
+      const n = parseFloat(document.getElementById(prefix + "_n").value) || 0;
+      const price = parseFloat(document.getElementById(prefix + "_price").value) || 0;
+      const orig = parseFloat(document.getElementById(prefix + "_orig").value) || 0;
+      const down = parseFloat(document.getElementById(prefix + "_down").value) || 0;
+      const taxAnnual = parseFloat(document.getElementById(prefix + "_tax_annual").value) || 0;
+      const hoa = parseFloat(document.getElementById(prefix + "_hoa").value) || 0;
+      const ins = parseFloat(document.getElementById(prefix + "_ins").value) || 0;
+      const pmi = parseFloat(document.getElementById(prefix + "_pmi").value) || 0;
 
-    <label>Insurance Monthly</label>
-    <input id="p_ins_monthly" type="number" readonly />
+      const borrowed = Math.max(price - down, 0);
+      const pmt = mortgagePayment(borrowed, rate, n);
+      const downReq = price * 0.20;
+      const taxMonthly = taxAnnual / 12;
+      const totalMonthly = pmt + hoa + ins + pmi + taxMonthly;
 
-    <label>Property Tax Monthly (est.)</label>
-    <input id="p_prop_monthly" type="number" readonly />
+      const loanPointsCost = borrowed * (pointsPct / 100);
+      const cashClosing = down + loanPointsCost + orig;
 
-    <label>Total Monthly Payment (est.)</label>
-    <input id="p_total_monthly" type="number" readonly />
-  </div>
+      document.getElementById(prefix + "_borrowed").textContent = fmtMoney(borrowed);
+      document.getElementById(prefix + "_pmt").textContent = fmtMoney(pmt);
+      document.getElementById(prefix + "_down_req").textContent = fmtMoney(downReq);
+      document.getElementById(prefix + "_total_monthly").textContent = fmtMoney(totalMonthly);
+      document.getElementById(prefix + "_cash_closing").textContent = fmtMoney(cashClosing);
+    }
 
-  <div style="display:flex; gap:12px; align-items:center;">
-    <button id="p_recalc">Recalculate</button>
-  </div>
+    function updateHomeSell(prefix) {
+      const mortBal = parseFloat(document.getElementById(prefix + "_mort_balance").value) || 0;
+      const salePrice = parseFloat(document.getElementById(prefix + "_sale_price").value) || 0;
+      const agentPct = parseFloat(document.getElementById(prefix + "_agent_pct").value) || 0;
+      const propTax = parseFloat(document.getElementById(prefix + "_prop_tax").value) || 0;
+      const monthSold = parseFloat(document.getElementById(prefix + "_month_sold").value) || 0;
+      const repairs = parseFloat(document.getElementById(prefix + "_repairs").value) || 0;
+      const atty = parseFloat(document.getElementById(prefix + "_atty").value) || 0;
 
-  <hr/>
+      const agentComm = salePrice * (agentPct / 100);
+      const taxCredit = propTax * (monthSold / 12); // approximation
+      const closingCosts = agentComm + taxCredit + repairs + atty;
+      const gross = salePrice - closingCosts;
+      const net = gross - mortBal;
 
-  <div class="card">
-    <div><strong>Cash due at closing:</strong> <span id="p_cash_due" class="result"></span></div>
-    <small>Cash due = Down payment + Loan points amount + Origination/closing fees (points are charged on loan amount).</small>
-  </div>
-</div>
+      document.getElementById(prefix + "_agent_comm").textContent = fmtMoney(agentComm);
+      document.getElementById(prefix + "_tax_credit").textContent = fmtMoney(taxCredit);
+      document.getElementById(prefix + "_closing_costs").textContent = fmtMoney(closingCosts);
+      document.getElementById(prefix + "_gross").textContent = fmtMoney(gross);
+      document.getElementById(prefix + "_net").textContent = fmtMoney(net);
+    }
 
-<!-- Sell panel -->
-<div id="sell" class="panel">
-  <div class="grid">
-    <label>Sale Price</label>
-    <input id="s_price" type="number" value="190000" />
+    function wireInputs() {
+      const ids = [
+        "hp1_rate","hp1_points","hp1_n","hp1_price","hp1_orig","hp1_down","hp1_tax_annual","hp1_hoa","hp1_ins","hp1_pmi",
+        "hp2_rate","hp2_points","hp2_n","hp2_price","hp2_orig","hp2_down","hp2_tax_annual","hp2_hoa","hp2_ins","hp2_pmi",
+        "hs1_mort_balance","hs1_sale_price","hs1_agent_pct","hs1_prop_tax","hs1_month_sold","hs1_repairs","hs1_atty",
+        "hs2_mort_balance","hs2_sale_price","hs2_agent_pct","hs2_prop_tax","hs2_month_sold","hs2_repairs","hs2_atty"
+      ];
+      ids.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) {
+          el.addEventListener("input", recalcAll);
+        }
+      });
+    }
 
-    <label>Current Mortgage Balance (owed)</label>
-    <input id="s_mort" type="number" value="120000" />
+    function recalcAll() {
+      updateHomePurchase("hp1");
+      updateHomePurchase("hp2");
+      updateHomeSell("hs1");
+      updateHomeSell("hs2");
+    }
 
-    <label>Agent Commission (%)</label>
-    <input id="s_agent_pct" type="number" value="6" step="0.01" />
-
-    <label>Current Annual Property Taxes</label>
-    <input id="s_prop_tax" type="number" value="3067" />
-
-    <label>Month Sold (1-12) - used to prorate taxes</label>
-    <input id="s_month_sold" type="number" value="10" min="1" max="12" />
-
-    <label>Selling Concessions / Repairs</label>
-    <input id="s_repairs" type="number" value="1000" />
-
-    <label>Closing Costs Estimate</label>
-    <input id="s_closing" type="number" value="950" />
-
-    <label>Attorney Fees</label>
-    <input id="s_atty" type="number" value="500" />
-
-    <label>Tax Credit to Buyer (optional)</label>
-    <input id="s_taxcredit" type="number" value="0" />
-  </div>
-
-  <div class="grid">
-    <label>Total Agent Commissions (calculated)</label>
-    <input id="s_agent_amt" type="number" readonly />
-
-    <label>Prorated Property Taxes</label>
-    <input id="s_prorated_tax" type="number" readonly />
-
-    <label>Gross Proceeds (Sale Price - Mortgage)</label>
-    <input id="s_gross" type="number" readonly />
-
-    <label>Net Proceeds (after fees & credits)</label>
-    <input id="s_net" type="number" readonly />
-  </div>
-
-  <div style="display:flex; gap:12px; align-items:center;">
-    <button id="s_recalc">Calculate</button>
-    <small style="margin-left:12px;color:#64748b;">Net Proceeds = Gross - agent comms - prorated taxes - repairs - closing costs - atty fees - tax credit</small>
-  </div>
-</div>
-
-<footer>
-  <div>Notes:</div>
-  <ul>
-    <li>Monthly mortgage payment uses standard amortization formula.</li>
-    <li>Points are computed as <code>loanAmount × points%</code>. Cash due at closing includes points and origination fees in addition to the down payment.</li>
-    <li>The prorated taxes assume simple monthly proration: <code>annualTaxes × (monthSold / 12)</code>.</li>
-  </ul>
-</footer>
-
-<script>
-  // Tab behavior
-  document.querySelectorAll('.tab').forEach(t => {
-    t.addEventListener('click', () => {
-      document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
-      document.querySelectorAll('.panel').forEach(x=>x.classList.remove('active'));
-      t.classList.add('active');
-      document.getElementById(t.dataset.target).classList.add('active');
+    document.addEventListener("DOMContentLoaded", function () {
+      wireInputs();
+      recalcAll();
     });
-  });
-
-  // Utility: amortization monthly payment
-  function monthlyPayment(principal, annualRatePct, nMonths){
-    var r = (annualRatePct/100)/12;
-    if (r === 0) return principal / nMonths;
-    return r * principal / (1 - Math.pow(1 + r, -nMonths));
-  }
-
-  // Purchase calculator logic
-  function recalcPurchase(){
-    const price = parseFloat(document.getElementById('p_price').value) || 0;
-    const down = parseFloat(document.getElementById('p_down').value) || 0;
-    const rate = parseFloat(document.getElementById('p_rate').value) || 0;
-    const n = parseInt(document.getElementById('p_n').value) || 360;
-    const pointsPct = parseFloat(document.getElementById('p_points_pct').value) || 0;
-    const origFee = parseFloat(document.getElementById('p_orig_fee').value) || 0;
-    const propTaxAnn = parseFloat(document.getElementById('p_prop_tax').value) || 0;
-    const insAnn = parseFloat(document.getElementById('p_insurance_ann').value) || 0;
-    const hoa = parseFloat(document.getElementById('p_hoa').value) || 0;
-    const pmi = parseFloat(document.getElementById('p_pmi').value) || 0;
-
-    // loan amount = purchase price - down payment (common)
-    const loan = Math.max(0, price - down);
-
-
-    // points amount = loan * pointsPct/100
-    const pointsAmt = loan * (pointsPct/100);
-
-    // monthly payment P&I
-    const monthlyLoan = monthlyPayment(loan, rate, n);
-
-    // monthly insurance & tax
-    const insMonthly = insAnn / 12;
-    const propMonthly = propTaxAnn / 12;
-
-    // total monthly
-    const totalMonthly = monthlyLoan + insMonthly + propMonthly + pmi + hoa;
-
-    // cash due at closing: down + points + origFee
-    const cashDue = down + pointsAmt + origFee;
-
-    // required 20% down (for display)
-    const required20 = price * 0.2;
-
-    // write back
-    document.getElementById('p_loan').value = round(loan,2);
-    document.getElementById('p_points_amt').value = round(pointsAmt,2);
-    document.getElementById('p_monthly_loan').value = round(monthlyLoan,2);
-    document.getElementById('p_ins_monthly').value = round(insMonthly,2);
-    document.getElementById('p_prop_monthly').value = round(propMonthly,2);
-    document.getElementById('p_total_monthly').value = round(totalMonthly,2);
-    document.getElementById('p_cash_due').textContent = '$' + formatNumber(round(cashDue,2));
-    document.getElementById('p_required20').value = round(required20,2);
-  }
-
-  // Sale calculator logic
-  function recalcSell(){
-    const price = parseFloat(document.getElementById('s_price').value) || 0;
-    const mortgage = parseFloat(document.getElementById('s_mort').value) || 0;
-    const agentPct = parseFloat(document.getElementById('s_agent_pct').value) || 0;
-    const propTax = parseFloat(document.getElementById('s_prop_tax').value) || 0;
-    const monthSold = parseFloat(document.getElementById('s_month_sold').value) || 0;
-    const repairs = parseFloat(document.getElementById('s_repairs').value) || 0;
-    const closing = parseFloat(document.getElementById('s_closing').value) || 0;
-    const atty = parseFloat(document.getElementById('s_atty').value) || 0;
-    const taxcredit = parseFloat(document.getElementById('s_taxcredit').value) || 0;
-
-    const agentAmt = price * (agentPct/100);
-    // prorated taxes: annual * (monthSold / 12)
-    const prorated = propTax * (monthSold / 12);
-
-    const gross = price - mortgage;
-    let net = gross - agentAmt - prorated - repairs - closing - atty - taxcredit;
-
-    document.getElementById('s_agent_amt').value = round(agentAmt,2);
-    document.getElementById('s_prorated_tax').value = round(prorated,2);
-    document.getElementById('s_gross').value = round(gross,2);
-    document.getElementById('s_net').value = round(net,2);
-  }
-
-  function round(v,dec){ return Math.round(v * Math.pow(10,dec))/Math.pow(10,dec); }
-  function formatNumber(v){ return v.toLocaleString(undefined, {minimumFractionDigits:2, maximumFractionDigits:2}); }
-
-  // wire up buttons and inputs
-  document.getElementById('p_recalc').addEventListener('click', recalcPurchase);
-  document.getElementById('s_recalc').addEventListener('click', recalcSell);
-
-  // auto recalc on changes (purchase)
-  Array.from(document.querySelectorAll('#purchase input[type="number"]')).forEach(inp=>{
-    inp.addEventListener('input', recalcPurchase);
-  });
-  Array.from(document.querySelectorAll('#sell input[type="number"]')).forEach(inp=>{
-    inp.addEventListener('input', recalcSell);
-  });
-
-  // run initial calculations with defaults
-  recalcPurchase();
-  recalcSell();
-</script>
+  </script>
 </body>
 </html>
